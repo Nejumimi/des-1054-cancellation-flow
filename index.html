@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>DeoVR Cancellation Flow · DES-1054</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="proto.css">
+</head>
+<body>
+<div class="site">
+  <header class="header">
+    <div class="header__left">
+      <button class="new-button ghost neutral icon-button" type="button" aria-label="Menu"><svg class="icon" width="20" height="20" aria-hidden="true"><use href="icons.svg#menu"/></svg></button>
+      <a class="header__logo" href="#" aria-label="DeoVR"><img class="logo logo--light" src="logo.svg" width="99" height="34" alt="DeoVR"><img class="logo logo--dark" src="logo-dark.svg" width="99" height="34" alt="DeoVR"></a>
+    </div>
+    <div class="header__search" role="search"><span>I'm looking for...</span><svg class="icon" width="20" height="20" aria-hidden="true"><use href="icons.svg#search"/></svg></div>
+    <div class="header__right">
+      <a class="new-button secondary neutral header__upload" href="#"><svg class="icon" aria-hidden="true"><use href="icons.svg#upload"/></svg><span class="button-content">Upload</span></a>
+      <button class="avatar avatar--sm" type="button" aria-label="Account">CH<svg class="icon avatar__crown" aria-hidden="true"><use href="icons.svg#crown"/></svg></button>
+    </div>
+  </header>
+
+  <div class="layout">
+    <nav class="sidebar" aria-label="Profile">
+      <a class="active" href="#">Profile</a>
+      <a href="#">Settings</a>
+      <a href="#">Notifications</a>
+      <a href="#">Hidden Content</a>
+    </nav>
+
+    <main class="page">
+      <h1 class="profile-title heading-4">Profile</h1>
+
+      <section class="user-info">
+        <div class="user-info__avatar"><span class="avatar">CH</span><svg class="icon avatar__crown" aria-hidden="true"><use href="icons.svg#crown"/></svg></div>
+        <h2 class="user-info__name">Chimpanzee-99281</h2>
+        <p class="user-info__email">chimpanzee99281@gmail.com</p>
+      </section>
+
+      <!-- Subscription card: active state (Benefits.tsx) -->
+      <section class="benefits" id="benefits-active">
+        <div class="benefits__content">
+          <div class="benefits__sub">
+            <div><span class="benefits__label">Current plan:</span><h2 class="benefits__value" data-plan-name>Monthly Premium</h2></div>
+            <div><span class="benefits__label">Next rebill on:</span><div class="benefits__value" data-plan-date-short>23 Nov, 2026</div></div>
+          </div>
+          <ul class="benefits__list">
+            <li class="benefits__item"><svg class="icon" aria-hidden="true"><use href="icons.svg#check-circle"/></svg><span>Unlimited streaming of full DeoVR library</span></li>
+            <li class="benefits__item"><svg class="icon" aria-hidden="true"><use href="icons.svg#check-circle"/></svg><span>Daily updates: 200+ videos in 30 days</span></li>
+            <li class="benefits__item"><svg class="icon" aria-hidden="true"><use href="icons.svg#check-circle"/></svg><span>Download to watch offline: 3 videos a month</span></li>
+            <li class="benefits__item"><svg class="icon" aria-hidden="true"><use href="icons.svg#check-circle"/></svg><span>30Gb <a class="benefits__link" href="#">DriveAI</a> storage</span></li>
+          </ul>
+        </div>
+        <div class="benefits__buttons">
+          <button class="new-button secondary neutral" type="button" id="btn-cancel"><span class="button-content">Cancel</span></button>
+          <button class="new-button secondary neutral" type="button"><span class="button-content">Manage</span></button>
+        </div>
+      </section>
+
+      <!-- Subscription card: cancelled state (new) -->
+      <section class="benefits benefits--cancelled" id="benefits-cancelled" hidden>
+        <div class="benefits__content">
+          <div class="benefits__sub">
+            <div><span class="benefits__label benefits__label--row">Current plan: <span class="status-badge">Cancelled</span></span><h2 class="benefits__value" data-plan-name>Monthly Premium</h2></div>
+            <div><span class="benefits__label">Access until:</span><div class="benefits__value" data-plan-date-short>23 Nov, 2026</div></div>
+            <p class="benefits__hint">You keep every Premium benefit until then and won't be charged again. Reactivate any time to keep it going.</p>
+          </div>
+          <ul class="benefits__list">
+            <li class="benefits__item"><svg class="icon" aria-hidden="true"><use href="icons.svg#check-circle"/></svg><span>Unlimited streaming of full DeoVR library</span></li>
+            <li class="benefits__item"><svg class="icon" aria-hidden="true"><use href="icons.svg#check-circle"/></svg><span>Daily updates: 200+ videos in 30 days</span></li>
+            <li class="benefits__item"><svg class="icon" aria-hidden="true"><use href="icons.svg#check-circle"/></svg><span>Download to watch offline: 3 videos a month</span></li>
+            <li class="benefits__item"><svg class="icon" aria-hidden="true"><use href="icons.svg#check-circle"/></svg><span>30Gb <a class="benefits__link" href="#">DriveAI</a> storage</span></li>
+          </ul>
+        </div>
+        <div class="benefits__buttons">
+          <button class="new-button primary brand" type="button" id="btn-reactivate"><span class="button-content">Reactivate</span></button>
+        </div>
+      </section>
+
+      <h3 class="promo-heading body-md-strong">Upgrade your Premium Plan</h3>
+      <div class="plans">
+        <div class="plan-card"><div class="plan-card__name">Annual Premium</div><div class="plan-card__period">Billed yearly</div><div class="plan-card__price">$8.49 <span>/ month</span></div><button class="new-button secondary neutral" type="button"><span class="button-content">Select</span></button></div>
+        <div class="plan-card"><div class="plan-card__name">6 Months Premium</div><div class="plan-card__period">Billed every 6 months</div><div class="plan-card__price">$11.66 <span>/ month</span></div><button class="new-button secondary neutral" type="button"><span class="button-content">Select</span></button></div>
+        <div class="plan-card"><div class="plan-card__name">Lifetime Premium</div><div class="plan-card__period">One-time payment</div><div class="plan-card__price">$499 <span>once</span></div><button class="new-button secondary neutral" type="button"><span class="button-content">Select</span></button></div>
+      </div>
+    </main>
+  </div>
+
+  <footer class="footer">
+    <div>
+      <div class="footer__logo"><img class="logo logo--light" src="logo.svg" width="99" height="34" alt="DeoVR"><img class="logo logo--dark" src="logo-dark.svg" width="99" height="34" alt="DeoVR"></div>
+      <p class="footer__copy">© 2026 DeoVR. This website is protected by reCAPTCHA, and the Google Privacy Policy and Terms of Service apply.</p>
+    </div>
+    <div><h3>About us</h3><ul><li>About DeoVR</li><li>Help Center</li><li>Hiring now</li><li>DeoVR Blog</li><li>Creator Handbook</li></ul></div>
+    <div><h3>Legal</h3><ul><li>Privacy Policy</li><li>Terms of Service</li><li>Acceptable Use Policy</li><li>Contest Terms</li></ul></div>
+    <div><h3>Social Media</h3><ul><li>X.com</li><li>Discord</li><li>Reddit</li><li>DEO Forum</li></ul></div>
+  </footer>
+</div>
+
+<!-- ===================== Cancellation modal ===================== -->
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div class="modal__content">
+    <div class="modal__header">
+      <div class="modal__top">
+        <button class="new-button ghost neutral icon-button modal__back" type="button" id="btn-back" aria-label="Go back" hidden><svg class="icon" aria-hidden="true"><use href="icons.svg#arrow-left"/></svg></button>
+        <h2 class="modal__title" id="modal-title">Thinking of leaving?</h2>
+        <button class="new-button ghost neutral icon-button modal__close" type="button" id="btn-close" aria-label="Close"><svg class="icon" aria-hidden="true"><use href="icons.svg#x-close"/></svg></button>
+      </div>
+      <p class="modal__subtitle" id="modal-subtitle" hidden></p>
+      <div class="steps" id="steps" aria-hidden="true"></div>
+    </div>
+
+    <div class="modal__body">
+
+      <!-- 1 · Thinking of leaving? -->
+      <section class="screen" data-screen="leaving" data-title="Thinking of leaving?">
+        <div class="plan-summary">
+          <div class="plan-summary__row">
+            <div>
+              <div class="plan-summary__name" data-plan-name>Monthly Premium</div>
+              <p class="plan-summary__price" data-plan-price>$14.99 per month</p>
+            </div>
+            <span class="plan-summary__tag">Your plan</span>
+          </div>
+          <p class="plan-summary__access">If you cancel, you'll keep Premium until <strong data-plan-date-long>November 23, 2026</strong> and won't be charged again.</p>
+        </div>
+        <h3 class="chips-title body-md-strong">Here's everything that's already yours</h3>
+        <div class="chips" id="chips"></div>
+        <div class="actions">
+          <button class="new-button secondary neutral" type="button" data-action="next"><span class="button-content">Continue Cancellation</span></button>
+          <button class="new-button primary brand is-primary" type="button" data-action="keep"><span class="button-content">Keep My Access</span></button>
+        </div>
+      </section>
+
+      <!-- 2 · Try the DeoVR app -->
+      <section class="screen" data-screen="app" data-title="Before you go…">
+        <p class="screen__lead"><strong>You haven't watched in the DeoVR app yet.</strong> Premium is at its best in a headset — full 8K VR, no browser limits.</p>
+        <div class="hero hero--app" role="img" aria-label="Watching in a VR headset">
+          <div class="hero__art"><i class="ring"></i><i class="ring"></i><i class="ring"></i><i class="hero__glow"></i></div>
+          <div class="hero__icon"><svg class="icon" aria-hidden="true"><use href="icons.svg#oculus"/></svg></div>
+          <div class="hero__text"><div class="hero__title">Go full immersive</div><div class="hero__sub">Watching on a screen is fine. Watching in VR is next level.</div></div>
+        </div>
+        <div class="info-stack">
+          <div class="info-card"><svg class="icon info-card__icon" aria-hidden="true"><use href="icons.svg#vision-pro"/></svg><div><div class="info-card__title">Works on Quest, Pico, Vision Pro and more</div><div class="info-card__desc">The app is free — your Premium works right away.</div></div></div>
+          <div class="info-card"><svg class="icon info-card__icon" aria-hidden="true"><use href="icons.svg#play"/></svg><div><div class="info-card__title">Up to 8K at 120 FPS</div><div class="info-card__desc">The full library in native VR quality, no browser limits.</div></div></div>
+        </div>
+        <div class="actions">
+          <button class="new-button secondary neutral" type="button" data-action="next"><span class="button-content">Continue Cancellation</span></button>
+          <button class="new-button primary brand is-primary" type="button" data-action="get-app"><span class="button-content">Get the DeoVR App</span></button>
+        </div>
+      </section>
+
+      <!-- 3 · Your Drive storage -->
+      <section class="screen" data-screen="drive" data-title="Before you go…">
+        <p class="screen__lead"><strong>You haven't used your Drive storage yet.</strong> Premium includes 30 GB in DeoVR Drive — your own VR videos, playable in DeoVR anywhere.</p>
+        <div class="hero hero--drive" role="img" aria-label="Your private video library in the cloud">
+          <div class="hero__art"><i class="hero__glow"></i></div>
+          <div class="hero__files"><i></i><i></i><i></i></div>
+          <div class="hero__icon"><svg class="icon" aria-hidden="true"><use href="icons.svg#cloud"/></svg></div>
+          <div class="hero__text"><div class="hero__title">Your private VR library</div><div class="hero__sub">Upload, enhance with AI, watch in the headset.</div></div>
+        </div>
+        <div class="info-stack">
+          <div class="info-card"><svg class="icon info-card__icon" aria-hidden="true"><use href="icons.svg#cloud"/></svg><div><div class="info-card__title">30 GB of storage, included with Premium</div><div class="info-card__desc">After cancelling, uploads stop and the storage is gone.</div></div></div>
+          <div class="info-card info-card--list">
+            <div class="info-row"><svg class="icon info-card__icon" aria-hidden="true"><use href="icons.svg#passthrough-ai"/></svg><div class="info-row__text"><span class="info-card__title">Passthrough AI</span><span class="info-card__desc">mixed reality — your real room around the scene</span></div></div>
+            <div class="info-row"><svg class="icon info-card__icon" aria-hidden="true"><use href="icons.svg#sparkles"/></svg><div class="info-row__text"><span class="info-card__title">Sync AI</span><span class="info-card__desc">interactive scripts for your videos</span></div></div>
+            <div class="info-card__note">AI plugins are paid separately with tokens</div>
+          </div>
+        </div>
+        <div class="actions">
+          <button class="new-button secondary neutral" type="button" data-action="next"><span class="button-content">Continue Cancellation</span></button>
+          <button class="new-button primary brand is-primary" type="button" data-action="open-drive"><span class="button-content">Open DeoVR Drive</span></button>
+        </div>
+      </section>
+
+      <!-- 4 · Why are you cancelling? -->
+      <section class="screen" data-screen="why" data-title="Why are you cancelling?" data-subtitle="Your answer helps us improve DeoVR.">
+        <form id="why-form" novalidate>
+          <div class="reasons" id="reasons" role="radiogroup" aria-label="Reason"></div>
+          <div class="comment" id="comment-wrap" hidden>
+            <label class="sr-only" for="comment-field">Tell us more</label>
+            <textarea class="textarea" id="comment-field" rows="3" placeholder="Tell us more (optional)"></textarea>
+          </div>
+          <p class="form-error" id="confirm-error" hidden role="alert"><svg class="icon" aria-hidden="true"><use href="icons.svg#stop-sign"/></svg><span>Something went wrong. Unable to cancel subscription — please try again</span></p>
+          <div class="actions">
+            <button class="new-button secondary neutral" type="button" data-action="keep"><span class="button-content">Keep My Access</span></button>
+            <button class="new-button primary negative is-primary" type="submit" id="btn-confirm"><span class="button-content">Confirm Cancellation</span></button>
+          </div>
+        </form>
+      </section>
+
+    </div>
+  </div>
+</div>
+
+<div class="toasts" id="toasts" aria-live="polite"></div>
+
+<!-- ===================== PROTOTYPE CONTROLS ===================== -->
+<div class="proto" id="proto">
+  <div class="proto__panel" id="proto-panel" hidden>
+    <div class="proto__group"><div class="proto__label">Theme</div><div class="proto__row">
+      <button class="proto__btn on" data-proto="theme" data-value="light">Light</button>
+      <button class="proto__btn" data-proto="theme" data-value="dark">Dark</button>
+    </div></div>
+    <div class="proto__group"><div class="proto__label">User conditions (backend)</div><div class="proto__row">
+      <button class="proto__btn on" data-proto="flag" data-value="app">Never used app</button>
+      <button class="proto__btn on" data-proto="flag" data-value="drive">Never used Drive</button>
+    </div></div>
+    <div class="proto__group"><div class="proto__label">Personal chips</div><div class="proto__row">
+      <button class="proto__btn on" data-proto="chips" data-value="normal">Normal</button>
+      <button class="proto__btn" data-proto="chips" data-value="long">Long numbers</button>
+      <button class="proto__btn" data-proto="chips" data-value="none">None</button>
+    </div></div>
+    <div class="proto__group"><div class="proto__label">Plan</div><div class="proto__row">
+      <button class="proto__btn on" data-proto="plan" data-value="monthly">Monthly</button>
+      <button class="proto__btn" data-proto="plan" data-value="annual">Annual</button>
+      <button class="proto__btn" data-proto="plan" data-value="long">Long name</button>
+    </div></div>
+    <div class="proto__group"><div class="proto__label">Confirm result</div><div class="proto__row">
+      <button class="proto__btn on" data-proto="result" data-value="success">Success</button>
+      <button class="proto__btn" data-proto="result" data-value="error">Error</button>
+    </div></div>
+    <div class="proto__group"><div class="proto__label">Progress indicator</div><div class="proto__row">
+      <button class="proto__btn on" data-proto="steps" data-value="on">Show</button>
+      <button class="proto__btn" data-proto="steps" data-value="off">Hide</button>
+    </div></div>
+    <div class="proto__group"><div class="proto__label">Jump</div><div class="proto__row">
+      <button class="proto__btn" data-proto="go" data-value="leaving">1</button>
+      <button class="proto__btn" data-proto="go" data-value="app">2</button>
+      <button class="proto__btn" data-proto="go" data-value="drive">3</button>
+      <button class="proto__btn" data-proto="go" data-value="why">4</button>
+      <button class="proto__btn" data-proto="reset" data-value="">Reset page</button>
+    </div></div>
+    <div class="proto__hint">Esc closes modal · P toggles this panel</div>
+  </div>
+  <button class="proto__toggle" id="proto-toggle" type="button">Proto</button>
+</div>
+
+<script src="proto.js"></script>
+</body>
+</html>
