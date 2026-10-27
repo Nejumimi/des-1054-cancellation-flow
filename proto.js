@@ -19,12 +19,12 @@
     long:   [ { icon: "heart", text: `Over ${fmt(12000)} favorites hand-picked by you` }, { icon: "user", text: `Following over ${fmt(1200)} creators` }, { icon: "eye", text: `Over ${fmt(2400)} hours in VR` } ],
     none:   [],
   };
+  // General perks = the benefits list on the subscription card (Benefits.tsx)
   const GENERAL = [
-    { icon: "film", text: "Endless library of premium VR" },
-    { icon: "sparkles", text: "Weekly drops for all your tastes" },
-    { icon: "crown", text: "Exclusive DeoVR Originals" },
-    { icon: "passthrough-ai", text: "Immersive AR & interactive videos" },
-    { icon: "cloud", text: "30 GB in DeoVR Drive" },
+    { icon: "film", text: "Unlimited streaming of full DeoVR library" },
+    { icon: "play", text: "Daily updates: 200+ videos in 30 days" },
+    { icon: "upload", text: "Download to watch offline: 3 videos a month" },
+    { icon: "cloud", text: "30Gb DriveAI storage" },
   ];
   const REASONS = {
     price: "Too expensive", content: "Not enough content I like", tech: "Playback or technical problems",
@@ -44,6 +44,7 @@
   const applyCancelled = () => {
     $("#benefits-active").hidden = state.cancelled;
     $("#benefits-cancelled").hidden = !state.cancelled;
+    $("#upgrade-section").hidden = state.cancelled;
   };
 
   /* ---------------- toasts ---------------- */
@@ -117,7 +118,7 @@
       setConfirmLoading(false);
       if (state.result === "error") { $("#confirm-error").hidden = false; return; }
       state.cancelled = true; applyCancelled(); close();
-      toast("success", `Your subscription is cancelled. You have Premium until ${fmtLong}`);
+      toast("neutral", `Your subscription is cancelled. You have Premium until ${fmtLong}`);
     }, 1200);
   });
 
@@ -129,7 +130,7 @@
     if (act === "next") show(state.index + 1);
     if (act === "keep") keep();
     if (act === "get-app") { toast("info", "Opens the DeoVR app download page (prototype)"); }
-    if (act === "open-drive") { toast("info", "Opens DeoVR Drive (prototype)"); }
+    if (act === "open-drive") { toast("info", "Opens DriveAI (prototype)"); }
   });
   $("#btn-back").addEventListener("click", () => show(state.index - 1));
   $("#btn-close").addEventListener("click", close);
