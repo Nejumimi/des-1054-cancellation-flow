@@ -12,16 +12,30 @@
 
 Флоу (2–4 экрана, зависит от условий бэкенда):
 
-1. **Thinking of leaving?** — всегда. Карточка плана (название, цена, дата окончания доступа, копи «If you cancel, you'll keep Premium until {date} and won't be charged again.»), блоки «Here's everything that's already yours» (до 3 персональных + общие, всего 5; состояние без персональных и с длинными числами — через панель). Кнопки: Keep My Access (primary), Continue Cancellation (secondary).
-2. **Try the DeoVR app** — только если юзер не заходил в приложение. Лид + hero + два инфо-блока. Кнопки: Get the DeoVR App (primary), Continue Cancellation (secondary). Keep My Access здесь нет (по ТЗ).
-3. **Your Drive storage** — только если не загружал видео в Drive. Та же раскладка, что экран 2: блок про 30 GB и блок с двумя AI-плагинами (Passthrough AI, Sync AI) с подписью «paid separately with tokens», чтобы не читались как часть Premium. Кнопки: Open DeoVR Drive (primary), Continue Cancellation (secondary).
-4. **Why are you cancelling?** — всегда, здесь подтверждение. Radio (одиночный выбор), порядок перемешивается при каждом открытии, «Other» всегда последний; при выборе Other появляется textarea. Кнопки: Confirm Cancellation (главная, доступна без выбора причины), Keep My Access (secondary). Состояния: loading на Confirm, ошибка (панель → Confirm result: Error).
+1. **Thinking of leaving?** — всегда. Карточка плана (название, цена, дата окончания доступа, копи «If you cancel, you'll keep Premium until {date} and won't be charged again.»), блоки «Here's everything that's already yours» (до 3 персональных + общие перки = бенефиты с карточки подписки, всего 5; состояние без персональных и с длинными числами — через панель). Кнопки: Continue Cancellation (secondary, слева), Keep My Access (primary, справа).
+2. **Try the DeoVR app** — только если юзер не заходил в приложение. Hero несёт сообщение («You haven't watched in the DeoVR app yet» + одна строка про headset) и один инфо-блок под ним. Кнопки: Continue Cancellation (secondary), Get the DeoVR App (primary). Keep My Access здесь нет (по ТЗ).
+3. **Your DriveAI storage** — только если не загружал видео в DriveAI. Та же раскладка: hero («You haven't used your DriveAI storage yet») + один блок: 30 GB хранилища и два AI-плагина (Passthrough AI, Sync AI) с подписью «paid separately with tokens». Кнопки: Continue Cancellation (secondary), Open DriveAI (primary).
+4. **Why are you cancelling?** — всегда, здесь подтверждение. Radio (одиночный выбор), порядок перемешивается при каждом открытии, «Other» всегда последний; при выборе Other появляется textarea. Кнопки: Confirm Cancellation (negative, слева — путь отмены в той же позиции, что и на экранах 1–3), Keep My Access (secondary, справа). Состояния: loading на Confirm, ошибка (панель → Confirm result: Error).
 
-После отмены: модалка закрывается, тост «Your subscription is cancelled. You have Premium until {date}», карточка подписки в профиле переходит в состояние **Cancelled** (бейдж рядом с «Current plan:», «Access until», кнопка Reactivate). Keep My Access → тост «Your Premium stays active».
+После отмены: модалка закрывается, нейтральный тост «Your subscription is cancelled. You have Premium until {date}», карточка подписки в профиле переходит в состояние **Cancelled** (бейдж рядом с «Current plan:», «Access until», кнопка Reactivate), блок «Upgrade your Premium Plan» скрывается. Keep My Access → тост «Your Premium stays active».
 
 Шапка модалки: X справа на всех экранах, стрелка назад слева со второго экрана. Индикатор прогресса — полоски, их количество = число реально показанных экранов (пропущенные 2/3 не ломают его); отключается в панели, если решим убрать. Отступ под шапкой 24px (20 header + 4 body, как в `ModalService`), высота модалки по контенту.
 
-Темы: light (дефолт) / dark. Брейкпоинты: 1440, 768, 360 (на мобиле модалка — bottom sheet, как `ModalService` при `< 480`).
+Темы: light (дефолт) / dark. Брейкпоинты: 1440, 768, 360 (на мобиле модалка — bottom sheet, как `ModalService` при `< 480`; кнопки закреплены внизу шторки — sticky, контент скроллится под ними).
+
+## Ревью Евгения (27.10) — что учтено
+
+- Мобилка, экраны 2–3: кнопки sticky внизу шторки + контент сокращён.
+- Путь отмены в одной позиции на всех экранах (слева; на мобиле — сверху).
+- Экраны 2–3: вводная строка убрана, сообщение в hero, под ним один блок.
+- Чипы = бенефиты с карточки подписки; «Weekly drops», «Originals», «AR & interactive» убраны.
+- Везде «DriveAI»: текст, кнопка «Open DriveAI», чип «30Gb DriveAI storage».
+- Тост об отмене нейтральный (`NewNotification` neutral). «Upgrade your Premium Plan» под отменённой карточкой скрыт.
+- Копи «Watching on a screen is fine…» убран.
+- Строки Passthrough AI / Sync AI на мобиле выровнены (название и описание в столбик).
+- Полоски в hero DriveAI заменены на «полку» из трёх превью.
+- Экран приложения: «Quest, Pico, Vision Pro», «8K at 120 FPS», «The app is free» — плейсхолдеры, помечены `DEV-TODO(copy)`, Евгений сверяет с клиентской командой.
+- Графика: hero на CSS — не финал, по ТЗ нужны иллюстрации (отдельная задача на графику, обе темы + мобильные кропы).
 
 ## Из кода (frontend-shared / deovr-frontend)
 
@@ -33,7 +47,7 @@
 | Карточка подписки в профиле (`Benefits`), UserInfo, заголовок страницы | `deovr-frontend/src/pages/ProfilePage/**` |
 | Radio 20px, 1px `stroke-selectors`, checked 2px + точка 10px | `frontend-shared/src/design-system/components/Radio/Radio.scss` |
 | Textarea: заливка `fillSubtleNeutral`, тень `$inputShadow`, focus 2px `borderFocus` | по `new-inputs/TextField/TextField.module.scss` (сам Textarea в new-DS не реализован, см. «Новое») |
-| Тосты: radius 16, тень, tinted-фон, иконка 32/20 | `frontend-shared/src/design-system/components/NewNotification/NewNotification.module.scss` |
+| Тосты: radius 16, тень, neutral/tinted-фон, иконка 32/20 | `frontend-shared/src/design-system/components/NewNotification/NewNotification.module.scss` |
 | Токены цвета/радиусов/размеров кнопок (light) | `frontend-shared/src/design-system/styles/semantic/_deovr-theme.scss`, `primitives/radius/_deovr.scss`, `primitives/button-sizes/_deovr.scss` |
 | Шапка, сайдбар 216px, логотип | `deovr-frontend/src/layouts/HeaderLayout`, `src/assets/logo.svg` |
 | Иконки | спрайт `deovr-frontend/src/components/Icon/assets/icons.svg` (только существующие имена) |
@@ -41,7 +55,7 @@
 ## Новое / чего нет в коде
 
 - **Dark-тема.** В `_deovr-theme.scss` только light. Dark-значения взяты из Figma-снапшота DeoVR Dark (`#080a0c` база, `#0d6cfc` brand, `#11161b` поверхность модалки). Если будем делать dark — нужен dark-бандл токенов.
-- **Hero-графика экранов 2 и 3** — CSS-заглушки в бренд-цветах (градиент + иконка из спрайта). По ТЗ нужны настоящие ассеты для обеих тем с мобильными кропами — отдельная задача на графику.
+- **Hero-графика экранов 2 и 3** — CSS-заглушки в бренд-цветах (градиент + иконка из спрайта). Нужны настоящие ассеты.
 - **Инфо-блоки** (бенефиты на экране 1, блоки под hero на 2–3) — единая плоская подложка `backgroundSecondary` (в dark — `backgroundTertiary`), radius 12, без обводки, иконка 20px из спрайта. Специально не похожи на кнопки/чипы. Компонента Chips в Web DS нет.
 - **Textarea** в new-DS не реализован — стили повторяют `TextField`, radius 16 (у однострочного инпута 20).
 - **Бейдж «Cancelled»** на карточке подписки — pill на `backgroundTintedNegative` / `contentNegative`, стоит в строке «Current plan:».
@@ -50,7 +64,7 @@
 
 ## Открытые вопросы (из задачи)
 
-- Экраны app и Drive отдельно (как здесь) или один «You haven't tried these yet» с двумя карточками?
+- Экраны app и DriveAI отдельно (как здесь) или один «You haven't tried these yet» с двумя карточками?
 - Оставляем ли индикатор прогресса (здесь — адаптивные полоски, выключаемые).
 - Нужен ли отдельный копи для годовых планов и триала на экране 1 (панель → Plan: Annual показывает цену «per year»).
 - Куда ведёт «Get the DeoVR App».
