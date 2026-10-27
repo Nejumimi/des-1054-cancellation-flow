@@ -80,11 +80,13 @@
         </div>
       </section>
 
+      <div id="upgrade-section">
       <h3 class="promo-heading body-md-strong">Upgrade your Premium Plan</h3>
       <div class="plans">
         <div class="plan-card"><div class="plan-card__name">Annual Premium</div><div class="plan-card__period">Billed yearly</div><div class="plan-card__price">$8.49 <span>/ month</span></div><button class="new-button secondary neutral" type="button"><span class="button-content">Select</span></button></div>
         <div class="plan-card"><div class="plan-card__name">6 Months Premium</div><div class="plan-card__period">Billed every 6 months</div><div class="plan-card__price">$11.66 <span>/ month</span></div><button class="new-button secondary neutral" type="button"><span class="button-content">Select</span></button></div>
         <div class="plan-card"><div class="plan-card__name">Lifetime Premium</div><div class="plan-card__period">One-time payment</div><div class="plan-card__price">$499 <span>once</span></div><button class="new-button secondary neutral" type="button"><span class="button-content">Select</span></button></div>
+      </div>
       </div>
     </main>
   </div>
@@ -137,15 +139,14 @@
 
       <!-- 2 · Try the DeoVR app -->
       <section class="screen" data-screen="app" data-title="Before you go…">
-        <p class="screen__lead"><strong>You haven't watched in the DeoVR app yet.</strong> Premium is at its best in a headset — full 8K VR, no browser limits.</p>
         <div class="hero hero--app" role="img" aria-label="Watching in a VR headset">
           <div class="hero__art"><i class="ring"></i><i class="ring"></i><i class="ring"></i><i class="hero__glow"></i></div>
           <div class="hero__icon"><svg class="icon" aria-hidden="true"><use href="icons.svg#oculus"/></svg></div>
-          <div class="hero__text"><div class="hero__title">Go full immersive</div><div class="hero__sub">Watching on a screen is fine. Watching in VR is next level.</div></div>
+          <div class="hero__text"><div class="hero__title">You haven't watched in the DeoVR app yet</div><div class="hero__sub">Premium is at its best in a headset — full immersion, native VR quality.</div></div>
         </div>
         <div class="info-stack">
-          <div class="info-card"><svg class="icon info-card__icon" aria-hidden="true"><use href="icons.svg#vision-pro"/></svg><div><div class="info-card__title">Works on Quest, Pico, Vision Pro and more</div><div class="info-card__desc">The app is free — your Premium works right away.</div></div></div>
-          <div class="info-card"><svg class="icon info-card__icon" aria-hidden="true"><use href="icons.svg#play"/></svg><div><div class="info-card__title">Up to 8K at 120 FPS</div><div class="info-card__desc">The full library in native VR quality, no browser limits.</div></div></div>
+          <!-- DEV-TODO(copy): device list, "free app" and quality claims are placeholders — Eugene is checking them with the client team -->
+          <div class="info-card"><svg class="icon info-card__icon" aria-hidden="true"><use href="icons.svg#vision-pro"/></svg><div><div class="info-card__title">Works on Quest, Pico, Vision Pro and more</div><div class="info-card__desc">The app is free — your Premium works right away. Up to 8K at 120 FPS.</div></div></div>
         </div>
         <div class="actions">
           <button class="new-button secondary neutral" type="button" data-action="next"><span class="button-content">Continue Cancellation</span></button>
@@ -155,24 +156,23 @@
 
       <!-- 3 · Your Drive storage -->
       <section class="screen" data-screen="drive" data-title="Before you go…">
-        <p class="screen__lead"><strong>You haven't used your Drive storage yet.</strong> Premium includes 30 GB in DeoVR Drive — your own VR videos, playable in DeoVR anywhere.</p>
         <div class="hero hero--drive" role="img" aria-label="Your private video library in the cloud">
           <div class="hero__art"><i class="hero__glow"></i></div>
-          <div class="hero__files"><i></i><i></i><i></i></div>
+          <div class="hero__shelf"><i><b></b></i><i><b></b></i><i><b></b></i></div>
           <div class="hero__icon"><svg class="icon" aria-hidden="true"><use href="icons.svg#cloud"/></svg></div>
-          <div class="hero__text"><div class="hero__title">Your private VR library</div><div class="hero__sub">Upload, enhance with AI, watch in the headset.</div></div>
+          <div class="hero__text"><div class="hero__title">You haven't used your DriveAI storage yet</div><div class="hero__sub">30 GB for your own VR videos, playable in DeoVR anywhere.</div></div>
         </div>
         <div class="info-stack">
-          <div class="info-card"><svg class="icon info-card__icon" aria-hidden="true"><use href="icons.svg#cloud"/></svg><div><div class="info-card__title">30 GB of storage, included with Premium</div><div class="info-card__desc">After cancelling, uploads stop and the storage is gone.</div></div></div>
           <div class="info-card info-card--list">
-            <div class="info-row"><svg class="icon info-card__icon" aria-hidden="true"><use href="icons.svg#passthrough-ai"/></svg><div class="info-row__text"><span class="info-card__title">Passthrough AI</span><span class="info-card__desc">mixed reality — your real room around the scene</span></div></div>
-            <div class="info-row"><svg class="icon info-card__icon" aria-hidden="true"><use href="icons.svg#sparkles"/></svg><div class="info-row__text"><span class="info-card__title">Sync AI</span><span class="info-card__desc">interactive scripts for your videos</span></div></div>
+            <div class="info-row"><svg class="icon info-card__icon info-card__icon--accent" aria-hidden="true"><use href="icons.svg#cloud"/></svg><div><div class="info-card__title">30 GB of storage is included with Premium</div><div class="info-card__desc">After cancelling, uploads stop and the storage is gone.</div></div></div>
+            <div class="info-row"><svg class="icon info-card__icon" aria-hidden="true"><use href="icons.svg#passthrough-ai"/></svg><div><div class="info-card__title">Passthrough AI</div><div class="info-card__desc">Mixed reality — your real room around the scene</div></div></div>
+            <div class="info-row"><svg class="icon info-card__icon" aria-hidden="true"><use href="icons.svg#sparkles"/></svg><div><div class="info-card__title">Sync AI</div><div class="info-card__desc">Interactive scripts for your videos</div></div></div>
             <div class="info-card__note">AI plugins are paid separately with tokens</div>
           </div>
         </div>
         <div class="actions">
           <button class="new-button secondary neutral" type="button" data-action="next"><span class="button-content">Continue Cancellation</span></button>
-          <button class="new-button primary brand is-primary" type="button" data-action="open-drive"><span class="button-content">Open DeoVR Drive</span></button>
+          <button class="new-button primary brand is-primary" type="button" data-action="open-drive"><span class="button-content">Open DriveAI</span></button>
         </div>
       </section>
 
@@ -186,8 +186,8 @@
           </div>
           <p class="form-error" id="confirm-error" hidden role="alert"><svg class="icon" aria-hidden="true"><use href="icons.svg#stop-sign"/></svg><span>Something went wrong. Unable to cancel subscription — please try again</span></p>
           <div class="actions">
+            <button class="new-button primary negative" type="submit" id="btn-confirm"><span class="button-content">Confirm Cancellation</span></button>
             <button class="new-button secondary neutral" type="button" data-action="keep"><span class="button-content">Keep My Access</span></button>
-            <button class="new-button primary negative is-primary" type="submit" id="btn-confirm"><span class="button-content">Confirm Cancellation</span></button>
           </div>
         </form>
       </section>
@@ -207,7 +207,7 @@
     </div></div>
     <div class="proto__group"><div class="proto__label">User conditions (backend)</div><div class="proto__row">
       <button class="proto__btn on" data-proto="flag" data-value="app">Never used app</button>
-      <button class="proto__btn on" data-proto="flag" data-value="drive">Never used Drive</button>
+      <button class="proto__btn on" data-proto="flag" data-value="drive">Never used DriveAI</button>
     </div></div>
     <div class="proto__group"><div class="proto__label">Personal chips</div><div class="proto__row">
       <button class="proto__btn on" data-proto="chips" data-value="normal">Normal</button>
